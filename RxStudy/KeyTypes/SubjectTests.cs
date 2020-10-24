@@ -132,6 +132,18 @@ namespace RxStudy.KeyTypes
             subject.OnNext("c");
         }
 
+        [Test]
+        public void SubjectOnErrorHandlingTest()
+        {
+            var subject = new Subject<int>();
+
+            subject.Subscribe(x => Trace.WriteLine(x), x => Trace.WriteLine(x));
+
+            subject.OnNext(1);
+
+            subject.OnError(new Exception());
+        }
+
         private static void SubscribeConsole(IObservable<string> sequence)
         {
             sequence.Subscribe(x => Trace.WriteLine(x));
