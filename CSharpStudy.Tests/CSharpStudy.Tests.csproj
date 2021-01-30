@@ -15,5 +15,9 @@
         <PackageReference Include="System.Interactive" Version="5.0.0" />
         <PackageReference Include="System.Reactive" Version="5.0.0" />
     </ItemGroup>
+    
+    <ItemGroup>
+      <Folder Include="Rx" />
+    </ItemGroup>
 
 </Project>
