@@ -9,15 +9,12 @@
     
     <ItemGroup>
         <PackageReference Include="DynamicData" Version="7.1.1" />
+        <PackageReference Include="LiteDB" Version="5.0.10" />
         <PackageReference Include="nunit" Version="3.13.0" />
         <PackageReference Include="NUnit3TestAdapter" Version="3.17.0" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.3" />
         <PackageReference Include="System.Interactive" Version="5.0.0" />
         <PackageReference Include="System.Reactive" Version="5.0.0" />
-    </ItemGroup>
-    
-    <ItemGroup>
-      <Folder Include="Rx" />
     </ItemGroup>
 
 </Project>
