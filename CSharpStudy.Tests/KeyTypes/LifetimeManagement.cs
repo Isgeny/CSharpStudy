@@ -4,7 +4,7 @@ using System.Reactive.Disposables;
 using System.Reactive.Subjects;
 using NUnit.Framework;
 
-namespace RxStudy.KeyTypes
+namespace CSharpStudy.Tests.KeyTypes
 {
     [TestFixture]
     public class LifetimeManagement

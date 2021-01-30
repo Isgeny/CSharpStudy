@@ -4,7 +4,7 @@ using System.Reactive.Linq;
 using System.Threading;
 using NUnit.Framework;
 
-namespace RxStudy.Sequences.CreatingSequence
+namespace CSharpStudy.Tests.Sequences.CreatingSequence
 {
     [TestFixture]
     public class FunctionalUnfoldsTests

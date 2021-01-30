@@ -6,7 +6,7 @@ using System.Reactive.Subjects;
 using System.Threading;
 using NUnit.Framework;
 
-namespace RxStudy.Sequences.CreatingSequence
+namespace CSharpStudy.Tests.Sequences.CreatingSequence
 {
     [TestFixture]
     public class SimpleFactoryMethodsTests

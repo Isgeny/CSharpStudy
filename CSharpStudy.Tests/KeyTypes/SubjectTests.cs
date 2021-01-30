@@ -4,7 +4,7 @@ using System.Reactive.Subjects;
 using System.Threading;
 using NUnit.Framework;
 
-namespace RxStudy.KeyTypes
+namespace CSharpStudy.Tests.KeyTypes
 {
     [TestFixture]
     public class SubjectTests

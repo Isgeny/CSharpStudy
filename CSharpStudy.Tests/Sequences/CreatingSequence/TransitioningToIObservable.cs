@@ -7,7 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using NUnit.Framework;
 
-namespace RxStudy.Sequences.CreatingSequence
+namespace CSharpStudy.Tests.Sequences.CreatingSequence
 {
     [TestFixture]
     public class TransitioningToIObservable

@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Reactive.Disposables;
 using NUnit.Framework;
 
-namespace RxStudy.KeyTypes
+namespace CSharpStudy.Tests.KeyTypes
 {
     [TestFixture]
     public class ImplementingObserverObservableTests
