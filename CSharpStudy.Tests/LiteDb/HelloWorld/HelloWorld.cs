@@ -7,6 +7,17 @@ namespace CSharpStudy.Tests.LiteDb.HelloWorld
     [TestFixture]
     public class HelloWorld
     {
+        public class Customer
+        {
+            public int Id { get; set; }
+
+            public string Name { get; set; }
+
+            public string[] Phones { get; set; }
+
+            public bool IsActive { get; set; }
+        }
+
         public class HelloLiteDb
         {
             [Test]

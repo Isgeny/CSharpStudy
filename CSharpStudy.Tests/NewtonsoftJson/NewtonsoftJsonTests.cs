@@ -8,6 +8,13 @@ namespace CSharpStudy.Tests.NewtonsoftJson
     [TestFixture]
     public class NewtonsoftJsonTests
     {
+        public class TestData
+        {
+            public TimeSpan TimeSpan { get; set; }
+
+            public TimeSpan? NullableTimeSpan { get; set; }
+        }
+
         [Test]
         public void Serialize()
         {
