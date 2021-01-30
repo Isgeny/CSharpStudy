@@ -1,19 +1,19 @@
 <Project Sdk="Microsoft.NET.Sdk">
     
     <PropertyGroup>
-        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <TargetFramework>net5.0</TargetFramework>
         <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-        <LangVersion>8</LangVersion>
+        <ProduceReferenceAssembly>false</ProduceReferenceAssembly>
         <IsPackable>false</IsPackable>
     </PropertyGroup>
     
     <ItemGroup>
-        <PackageReference Include="DynamicData" Version="6.17.14" />
-        <PackageReference Include="nunit" Version="3.12.0" />
+        <PackageReference Include="DynamicData" Version="7.1.1" />
+        <PackageReference Include="nunit" Version="3.13.0" />
         <PackageReference Include="NUnit3TestAdapter" Version="3.17.0" />
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.1" />
-        <PackageReference Include="System.Interactive" Version="4.1.1" />
-        <PackageReference Include="System.Reactive" Version="4.4.1" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.3" />
+        <PackageReference Include="System.Interactive" Version="5.0.0" />
+        <PackageReference Include="System.Reactive" Version="5.0.0" />
     </ItemGroup>
 
 </Project>
