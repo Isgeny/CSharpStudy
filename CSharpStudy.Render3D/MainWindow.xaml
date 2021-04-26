@@ -27,7 +27,12 @@
     </Window.Resources>
 
     <Grid>
-        <hx:Viewport3DX Style="{StaticResource Viewport3DStyle}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+
+        <hx:Viewport3DX Grid.Column="0" Style="{StaticResource Viewport3DStyle}" ModelUpDirection="0,0,1">
             <hx:Viewport3DX.InputBindings>
                 <KeyBinding Command="hx:ViewportCommands.ZoomExtents" Gesture="Control+E" />
                 <MouseBinding Command="hx:ViewportCommands.Rotate" Gesture="LeftClick" />
@@ -35,9 +40,12 @@
                 <MouseBinding Command="hx:ViewportCommands.Pan" Gesture="MiddleClick" />
             </hx:Viewport3DX.InputBindings>
 
-            <hx:Viewport3DX.DefaultCamera>
-                <hx:PerspectiveCamera />
-            </hx:Viewport3DX.DefaultCamera>
+            <hx:Viewport3DX.Camera>
+                <hx:PerspectiveCamera x:Name="Camera"
+                                      Position="0,-25,0"
+                                      LookDirection="0,1,0"
+                                      UpDirection="0,0,1" />
+            </hx:Viewport3DX.Camera>
             <hx:Viewport3DX.EffectsManager>
                 <hx:DefaultEffectsManager />
             </hx:Viewport3DX.EffectsManager>
@@ -46,5 +54,32 @@
             <hx:ItemsModel3D ItemsSource="{Binding MeshModels}"
                              ItemTemplate="{StaticResource MeshModelsTemplate}" />
         </hx:Viewport3DX>
+
+        <Grid Grid.Column="1" Width="200">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0"
+                       Text="Position:" />
+            <TextBox Grid.Row="0" Grid.Column="1"
+                     Text="{Binding ElementName=Camera, Path=Position, Mode=TwoWay}" />
+
+            <TextBlock Grid.Row="1" Grid.Column="0"
+                       Text="LookDirection:" />
+            <TextBox Grid.Row="1" Grid.Column="1"
+                     Text="{Binding ElementName=Camera, Path=LookDirection, Mode=TwoWay}" />
+
+            <TextBlock Grid.Row="2" Grid.Column="0"
+                       Text="UpDirection:" />
+            <TextBox Grid.Row="2" Grid.Column="1"
+                     Text="{Binding ElementName=Camera, Path=UpDirection, Mode=TwoWay}" />
+        </Grid>
     </Grid>
 </Window>
