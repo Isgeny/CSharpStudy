@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:hx="http://helix-toolkit.org/wpf/SharpDX"
         xmlns:render3D="clr-namespace:CSharpStudy.Render3D"
-        xmlns:geometry="clr-namespace:CSharpStudy.Render3D.Geometry"
         Title="Helix Toolkit Study"
         WindowStartupLocation="CenterScreen"
         WindowState="Maximized">
@@ -15,15 +14,9 @@
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Resources/ViewPort3DStyles.xaml" />
+                <ResourceDictionary Source="Resources/MainWindowStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
-
-            <DataTemplate x:Key="MeshModelsTemplate" DataType="geometry:IMeshViewModel">
-                <hx:MeshGeometryModel3D Geometry="{Binding Geometry}"
-                                        Material="{Binding Material}" />
-            </DataTemplate>
         </ResourceDictionary>
-
     </Window.Resources>
 
     <Grid>
@@ -32,23 +25,22 @@
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
 
-        <hx:Viewport3DX Grid.Column="0" Style="{StaticResource Viewport3DStyle}" ModelUpDirection="0,0,1">
+        <hx:Viewport3DX x:Name="Viewport" Grid.Column="0"
+                        Style="{StaticResource Viewport3DStyle}"
+                        DefaultCamera="{Binding HomeCamera}"
+                        Camera="{Binding Camera}">
             <hx:Viewport3DX.InputBindings>
                 <KeyBinding Command="hx:ViewportCommands.ZoomExtents" Gesture="Control+E" />
                 <MouseBinding Command="hx:ViewportCommands.Rotate" Gesture="LeftClick" />
                 <MouseBinding Command="hx:ViewportCommands.Zoom" Gesture="MiddleClick" />
+                <MouseBinding Command="hx:ViewportCommands.Zoom" Gesture="Control+MiddleClick" />
                 <MouseBinding Command="hx:ViewportCommands.Pan" Gesture="MiddleClick" />
             </hx:Viewport3DX.InputBindings>
 
-            <hx:Viewport3DX.Camera>
-                <hx:PerspectiveCamera x:Name="Camera"
-                                      Position="0,-25,0"
-                                      LookDirection="0,1,0"
-                                      UpDirection="0,0,1" />
-            </hx:Viewport3DX.Camera>
             <hx:Viewport3DX.EffectsManager>
                 <hx:DefaultEffectsManager />
             </hx:Viewport3DX.EffectsManager>
+
             <hx:AmbientLight3D />
 
             <hx:ItemsModel3D ItemsSource="{Binding MeshModels}"
@@ -64,22 +56,78 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
             <TextBlock Grid.Row="0" Grid.Column="0"
+                       Style="{StaticResource TextBlockStyle}"
                        Text="Position:" />
             <TextBox Grid.Row="0" Grid.Column="1"
-                     Text="{Binding ElementName=Camera, Path=Position, Mode=TwoWay}" />
+                     Style="{StaticResource TextBoxStyle}"
+                     Text="{Binding Camera.Position, Mode=TwoWay}" />
 
             <TextBlock Grid.Row="1" Grid.Column="0"
+                       Style="{StaticResource TextBlockStyle}"
                        Text="LookDirection:" />
             <TextBox Grid.Row="1" Grid.Column="1"
-                     Text="{Binding ElementName=Camera, Path=LookDirection, Mode=TwoWay}" />
+                     Style="{StaticResource TextBoxStyle}"
+                     Text="{Binding Camera.LookDirection, Mode=TwoWay}" />
 
             <TextBlock Grid.Row="2" Grid.Column="0"
+                       Style="{StaticResource TextBlockStyle}"
                        Text="UpDirection:" />
             <TextBox Grid.Row="2" Grid.Column="1"
-                     Text="{Binding ElementName=Camera, Path=UpDirection, Mode=TwoWay}" />
+                     Style="{StaticResource TextBoxStyle}"
+                     Text="{Binding Camera.UpDirection, Mode=TwoWay}" />
+
+            <Button Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
+                    Style="{StaticResource ButtonStyle}"
+                    Content="View all"
+                    Command="hx:ViewportCommands.ZoomExtents"
+                    CommandTarget="{Binding ElementName=Viewport}" />
+
+            <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
+                    Style="{StaticResource ButtonStyle}"
+                    Content="Zoom" />
+
+            <Button Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"
+                    Style="{StaticResource ButtonStyle}"
+                    Content="Set home"
+                    Command="{Binding SetHomeCameraCommand}" />
+
+            <Button Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2"
+                    Style="{StaticResource ButtonStyle}"
+                    Content="Return home"
+                    Command="hx:ViewportCommands.Reset"
+                    CommandTarget="{Binding ElementName=Viewport}" />
+
+            <ToggleButton Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2"
+                          Style="{StaticResource ButtonStyle}"
+                          Content="Coordinates"
+                          IsChecked="{Binding ElementName=Viewport, Path=ShowCoordinateSystem, Mode=TwoWay}" />
+
+            <ToggleButton Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2"
+                          Style="{StaticResource ButtonStyle}"
+                          Content="Grid" />
+
+            <ToggleButton Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2"
+                          Style="{StaticResource ButtonStyle}"
+                          Content="AntiRoll" />
+
+            <TextBlock Grid.Row="10" Grid.Column="0"
+                       Style="{StaticResource TextBlockStyle}"
+                       Text="Background: " />
+            <ComboBox Grid.Row="10" Grid.Column="1"
+                      Style="{StaticResource ComboboxStyle}"
+                      ItemsSource="{StaticResource BackgroundColors}"
+                      SelectedValue="{Binding ElementName=Viewport, Path=BackgroundColor, Mode=TwoWay}" />
         </Grid>
     </Grid>
 </Window>

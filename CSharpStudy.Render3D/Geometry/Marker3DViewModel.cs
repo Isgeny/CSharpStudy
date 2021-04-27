@@ -1,5 +1,6 @@
 ﻿using CSharpStudy.Render3D.Utils;
 using HelixToolkit.Wpf.SharpDX;
+using Prism.Mvvm;
 using SharpDX;
 using Color = System.Drawing.Color;
 

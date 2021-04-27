@@ -12,12 +12,15 @@
         <PackageReference Include="Cyotek.Drawing.BitmapFont" Version="2.0.2" />
         <PackageReference Include="HelixToolkit" Version="2.16.0" />
         <PackageReference Include="HelixToolkit.Wpf.SharpDX" Version="2.16.0" />
+        <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.31" />
+        <PackageReference Include="Prism.Wpf" Version="8.0.0.1909" />
         <PackageReference Include="SharpDX.D3DCompiler" Version="4.2.0" />
         <PackageReference Include="SharpDX.Direct2D1" Version="4.2.0" />
         <PackageReference Include="SharpDX.Direct3D11" Version="4.2.0" />
         <PackageReference Include="SharpDX.Direct3D9" Version="4.2.0" />
         <PackageReference Include="SharpDX.DXGI" Version="4.2.0" />
         <PackageReference Include="SharpDX.Mathematics" Version="4.2.0" />
+        <PackageReference Include="System.Windows.Interactivity.WPF" Version="2.0.20525" />
     </ItemGroup>
 
 </Project>
