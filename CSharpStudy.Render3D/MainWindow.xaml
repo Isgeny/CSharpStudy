@@ -62,69 +62,74 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <TextBlock Grid.Row="0" Grid.Column="0"
-                       Style="{StaticResource TextBlockStyle}"
-                       Text="Position:" />
-            <TextBox Grid.Row="0" Grid.Column="1"
-                     Style="{StaticResource TextBoxStyle}"
-                     Text="{Binding Camera.Position, Mode=TwoWay}" />
-
-            <TextBlock Grid.Row="1" Grid.Column="0"
-                       Style="{StaticResource TextBlockStyle}"
-                       Text="LookDirection:" />
-            <TextBox Grid.Row="1" Grid.Column="1"
-                     Style="{StaticResource TextBoxStyle}"
-                     Text="{Binding Camera.LookDirection, Mode=TwoWay}" />
-
-            <TextBlock Grid.Row="2" Grid.Column="0"
-                       Style="{StaticResource TextBlockStyle}"
-                       Text="UpDirection:" />
-            <TextBox Grid.Row="2" Grid.Column="1"
-                     Style="{StaticResource TextBoxStyle}"
-                     Text="{Binding Camera.UpDirection, Mode=TwoWay}" />
-
-            <Button Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
+            <Button Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
                     Style="{StaticResource ButtonStyle}"
                     Content="View all"
                     Command="hx:ViewportCommands.ZoomExtents"
                     CommandTarget="{Binding ElementName=Viewport}" />
 
-            <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
+            <Button Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
                     Style="{StaticResource ButtonStyle}"
                     Content="Zoom" />
 
-            <Button Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"
+            <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
                     Style="{StaticResource ButtonStyle}"
                     Content="Set home"
                     Command="{Binding SetHomeCameraCommand}" />
 
-            <Button Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2"
+            <Button Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
                     Style="{StaticResource ButtonStyle}"
                     Content="Return home"
                     Command="hx:ViewportCommands.Reset"
                     CommandTarget="{Binding ElementName=Viewport}" />
 
-            <ToggleButton Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2"
+            <ToggleButton Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
                           Style="{StaticResource ButtonStyle}"
                           Content="Coordinates"
                           IsChecked="{Binding ElementName=Viewport, Path=ShowCoordinateSystem, Mode=TwoWay}" />
 
-            <ToggleButton Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2"
+            <ToggleButton Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"
                           Style="{StaticResource ButtonStyle}"
                           Content="Grid" />
 
-            <ToggleButton Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2"
+            <ToggleButton Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2"
                           Style="{StaticResource ButtonStyle}"
-                          Content="AntiRoll" />
+                          Content="Anti roll Z"
+                          IsChecked="{Binding ElementName=Viewport, Path=AllowUpDownRotation, Mode=TwoWay, Converter={StaticResource InvertBoolConverter}}" />
 
-            <TextBlock Grid.Row="10" Grid.Column="0"
+            <WrapPanel Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2">
+                <Button Content="T"
+                        Style="{StaticResource ButtonStyle}"
+                        Command="hx:ViewportCommands.TopView"
+                        CommandTarget="{Binding ElementName=Viewport}" />
+                <Button Content="B"
+                        Style="{StaticResource ButtonStyle}"
+                        Command="hx:ViewportCommands.BottomView"
+                        CommandTarget="{Binding ElementName=Viewport}" />
+                <Button Content="W"
+                        Style="{StaticResource ButtonStyle}"
+                        Command="hx:ViewportCommands.BackView"
+                        CommandTarget="{Binding ElementName=Viewport}" />
+                <Button Content="E"
+                        Style="{StaticResource ButtonStyle}"
+                        Command="hx:ViewportCommands.FrontView"
+                        CommandTarget="{Binding ElementName=Viewport}" />
+                <Button Content="S"
+                        Style="{StaticResource ButtonStyle}"
+                        Command="hx:ViewportCommands.LeftView"
+                        CommandTarget="{Binding ElementName=Viewport}" />
+                <Button Content="N"
+                        Style="{StaticResource ButtonStyle}"
+                        Command="hx:ViewportCommands.RightView"
+                        CommandTarget="{Binding ElementName=Viewport}" />
+            </WrapPanel>
+
+            <TextBlock Grid.Row="8" Grid.Column="0"
                        Style="{StaticResource TextBlockStyle}"
                        Text="Background: " />
-            <ComboBox Grid.Row="10" Grid.Column="1"
+            <ComboBox Grid.Row="8" Grid.Column="1"
                       Style="{StaticResource ComboboxStyle}"
                       ItemsSource="{StaticResource BackgroundColors}"
                       SelectedValue="{Binding ElementName=Viewport, Path=BackgroundColor, Mode=TwoWay}" />

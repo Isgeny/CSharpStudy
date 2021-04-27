@@ -3,7 +3,10 @@
                     xmlns:geometry="clr-namespace:CSharpStudy.Render3D.Geometry"
                     xmlns:hx="clr-namespace:HelixToolkit.Wpf.SharpDX;assembly=HelixToolkit.Wpf.SharpDX"
                     xmlns:hx2D="clr-namespace:HelixToolkit.Wpf.SharpDX.Elements2D;assembly=HelixToolkit.Wpf.SharpDX"
-                    xmlns:hxControl="clr-namespace:HelixToolkit.Wpf.SharpDX.Controls;assembly=HelixToolkit.Wpf.SharpDX">
+                    xmlns:hxControl="clr-namespace:HelixToolkit.Wpf.SharpDX.Controls;assembly=HelixToolkit.Wpf.SharpDX"
+                    xmlns:converters="clr-namespace:CSharpStudy.Render3D.Converters">
+
+    <converters:InvertBoolConverter x:Key="InvertBoolConverter" />
 
     <x:Array x:Key="BackgroundColors" Type="Color">
         <Color>Black</Color>
