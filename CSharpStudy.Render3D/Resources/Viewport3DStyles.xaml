@@ -1,0 +1,69 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:geometry="clr-namespace:CSharpStudy.Render3D.Geometry"
+                    xmlns:hx="clr-namespace:HelixToolkit.Wpf.SharpDX;assembly=HelixToolkit.Wpf.SharpDX"
+                    xmlns:hx2D="clr-namespace:HelixToolkit.Wpf.SharpDX.Elements2D;assembly=HelixToolkit.Wpf.SharpDX"
+                    xmlns:hxControl="clr-namespace:HelixToolkit.Wpf.SharpDX.Controls;assembly=HelixToolkit.Wpf.SharpDX">
+    <DataTemplate x:Key="MeshModelsTemplate" DataType="geometry:IMeshViewModel">
+        <hx:MeshGeometryModel3D Geometry="{Binding Geometry}"
+                                Material="{Binding Material}" />
+    </DataTemplate>
+
+    <ControlTemplate x:Key="Viewport3DTemplate" TargetType="hx:Viewport3DX">
+        <Grid FocusVisualStyle="{x:Null}"
+              Style="{x:Null}">
+            <ContentPresenter x:Name="PART_Canvas"
+                              HorizontalAlignment="Stretch"
+                              VerticalAlignment="Stretch"
+                              DataContext="{TemplateBinding DataContext}" />
+            <hxControl:HelixItemsControl x:Name="PART_Items">
+                <hx:ViewBoxModel3D x:Name="PART_ViewCube"
+                                   EnableEdgeClick="{TemplateBinding IsViewCubeEdgeClicksEnabled}"
+                                   EnableMover="{TemplateBinding IsViewCubeMoverEnabled}"
+                                   IsRendering="{TemplateBinding ShowViewCube}"
+                                   RelativeScreenLocationX="{TemplateBinding ViewCubeHorizontalPosition}"
+                                   RelativeScreenLocationY="{TemplateBinding ViewCubeVerticalPosition}"
+                                   SizeScale="{TemplateBinding ViewCubeSize}"
+                                   UpDirection="{TemplateBinding ModelUpDirection}"
+                                   ViewBoxTexture="{TemplateBinding ViewCubeTexture}" />
+                <hx:CoordinateSystemModel3D x:Name="PART_CoordinateView"
+                                            CoordinateSystemLabelX="{TemplateBinding CoordinateSystemLabelX}"
+                                            CoordinateSystemLabelY="{TemplateBinding CoordinateSystemLabelY}"
+                                            CoordinateSystemLabelZ="{TemplateBinding CoordinateSystemLabelZ}"
+                                            AxisXColor="{TemplateBinding CoordinateSystemAxisXColor}"
+                                            AxisYColor="{TemplateBinding CoordinateSystemAxisYColor}"
+                                            AxisZColor="{TemplateBinding CoordinateSystemAxisZColor}"
+                                            EnableMover="{TemplateBinding IsCoordinateSystemMoverEnabled}"
+                                            IsRendering="{TemplateBinding ShowCoordinateSystem}"
+                                            LabelColor="{TemplateBinding CoordinateSystemLabelForeground}"
+                                            RelativeScreenLocationX="{TemplateBinding CoordinateSystemHorizontalPosition}"
+                                            RelativeScreenLocationY="{TemplateBinding CoordinateSystemVerticalPosition}"
+                                            SizeScale="{TemplateBinding CoordinateSystemSize}" />
+                <hx2D:FrameStatisticsModel2D x:Name="PART_FrameStatisticView" />
+                <hx2D:TextModel2D x:Name="PART_TitleView"
+                                  Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=FrameRate, StringFormat=FPS: {0:F0}}"
+                                  VerticalAlignment="Bottom"
+                                  HorizontalAlignment="Left"
+                                  FontSize="10"
+                                  Foreground="SpringGreen"
+                                  Margin="10" />
+            </hxControl:HelixItemsControl>
+        </Grid>
+    </ControlTemplate>
+
+    <Style x:Key="BaseViewport3DStyle" TargetType="hx:Viewport3DX">
+        <Setter Property="Template" Value="{StaticResource Viewport3DTemplate}" />
+        <Setter Property="ShowViewCube" Value="False" />
+        <Setter Property="CoordinateSystemHorizontalPosition" Value="0.8" />
+        <Setter Property="CoordinateSystemVerticalPosition" Value="-0.8" />
+        <Setter Property="UseDefaultGestures" Value="False" />
+        <Setter Property="IsChangeFieldOfViewEnabled" Value="False" />
+        <Setter Property="ModelUpDirection" Value="0,0,1" />
+        <Setter Property="CameraRotationMode" Value="Trackball" />
+        <!--DEBUG-->
+        <Setter Property="ShowCameraInfo" Value="True" />
+        <Setter Property="ShowCameraTarget" Value="True" />
+        <Setter Property="ShowTriangleCountInfo" Value="True" />
+        <!--DEBUG-->
+    </Style>
+</ResourceDictionary>

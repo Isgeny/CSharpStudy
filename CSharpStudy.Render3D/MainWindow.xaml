@@ -1,12 +1,11 @@
 ﻿<Window x:Class="CSharpStudy.Render3D.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:hx="http://helix-toolkit.org/wpf/SharpDX"
         xmlns:render3D="clr-namespace:CSharpStudy.Render3D"
+        xmlns:controls="clr-namespace:CSharpStudy.Render3D.Controls"
         Title="Helix Toolkit Study"
         WindowStartupLocation="CenterScreen"
         WindowState="Maximized">
-
     <Window.DataContext>
         <render3D:MainWindowViewModel />
     </Window.DataContext>
@@ -25,27 +24,10 @@
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
 
-        <hx:Viewport3DX x:Name="Viewport" Grid.Column="0"
-                        Style="{StaticResource Viewport3DStyle}"
-                        DefaultCamera="{Binding HomeCamera}"
-                        Camera="{Binding Camera}">
-            <hx:Viewport3DX.InputBindings>
-                <KeyBinding Command="hx:ViewportCommands.ZoomExtents" Gesture="Control+E" />
-                <MouseBinding Command="hx:ViewportCommands.Rotate" Gesture="LeftClick" />
-                <MouseBinding Command="hx:ViewportCommands.Zoom" Gesture="MiddleClick" />
-                <MouseBinding Command="hx:ViewportCommands.Zoom" Gesture="Control+MiddleClick" />
-                <MouseBinding Command="hx:ViewportCommands.Pan" Gesture="MiddleClick" />
-            </hx:Viewport3DX.InputBindings>
-
-            <hx:Viewport3DX.EffectsManager>
-                <hx:DefaultEffectsManager />
-            </hx:Viewport3DX.EffectsManager>
-
-            <hx:AmbientLight3D />
-
-            <hx:ItemsModel3D ItemsSource="{Binding MeshModels}"
-                             ItemTemplate="{StaticResource MeshModelsTemplate}" />
-        </hx:Viewport3DX>
+        <controls:Scene3DControl x:Name="Scene3D"
+                                 ShowCoordinateSystem="{Binding ElementName=ShowCoordinatesButton, Path=IsChecked}"
+                                 AntiRollZ="{Binding ElementName=AntiRollZButton, Path=IsChecked}"
+                                 BackgroundColor="{Binding ElementName=BackgroundCombobox, Path=SelectedValue}" />
 
         <Grid Grid.Column="1" Width="200">
             <Grid.ColumnDefinitions>
@@ -67,63 +49,57 @@
             <Button Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
                     Style="{StaticResource ButtonStyle}"
                     Content="View all"
-                    Command="hx:ViewportCommands.ZoomExtents"
-                    CommandTarget="{Binding ElementName=Viewport}" />
+                    Command="{Binding ElementName=Scene3D, Path=ViewAllCommand, Mode=OneTime}" />
 
             <Button Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
                     Style="{StaticResource ButtonStyle}"
-                    Content="Zoom" />
+                    Content="[WIP] Zoom" />
 
             <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
                     Style="{StaticResource ButtonStyle}"
                     Content="Set home"
-                    Command="{Binding SetHomeCameraCommand}" />
+                    Command="{Binding ElementName=Scene3D, Path=SetHomeViewCommand, Mode=OneTime}" />
 
             <Button Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
                     Style="{StaticResource ButtonStyle}"
                     Content="Return home"
-                    Command="hx:ViewportCommands.Reset"
-                    CommandTarget="{Binding ElementName=Viewport}" />
+                    Command="{Binding ElementName=Scene3D, Path=ReturnHomeViewCommand, Mode=OneTime}" />
 
             <ToggleButton Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
                           Style="{StaticResource ButtonStyle}"
+                          Name="ShowCoordinatesButton"
                           Content="Coordinates"
-                          IsChecked="{Binding ElementName=Viewport, Path=ShowCoordinateSystem, Mode=TwoWay}" />
+                          IsChecked="True" />
 
             <ToggleButton Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"
                           Style="{StaticResource ButtonStyle}"
-                          Content="Grid" />
+                          Content="[WIP] Grid"
+                          IsChecked="True" />
 
             <ToggleButton Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2"
                           Style="{StaticResource ButtonStyle}"
-                          Content="Anti roll Z"
-                          IsChecked="{Binding ElementName=Viewport, Path=AllowUpDownRotation, Mode=TwoWay, Converter={StaticResource InvertBoolConverter}}" />
+                          Name="AntiRollZButton"
+                          Content="Anti roll Z" />
 
             <WrapPanel Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2">
                 <Button Content="T"
                         Style="{StaticResource ButtonStyle}"
-                        Command="hx:ViewportCommands.TopView"
-                        CommandTarget="{Binding ElementName=Viewport}" />
+                        Command="{Binding ElementName=Scene3D, Path=TopViewCommand, Mode=OneTime}" />
                 <Button Content="B"
                         Style="{StaticResource ButtonStyle}"
-                        Command="hx:ViewportCommands.BottomView"
-                        CommandTarget="{Binding ElementName=Viewport}" />
+                        Command="{Binding ElementName=Scene3D, Path=BottomViewCommand, Mode=OneTime}" />
                 <Button Content="W"
                         Style="{StaticResource ButtonStyle}"
-                        Command="hx:ViewportCommands.BackView"
-                        CommandTarget="{Binding ElementName=Viewport}" />
+                        Command="{Binding ElementName=Scene3D, Path=WestViewCommand, Mode=OneTime}" />
                 <Button Content="E"
                         Style="{StaticResource ButtonStyle}"
-                        Command="hx:ViewportCommands.FrontView"
-                        CommandTarget="{Binding ElementName=Viewport}" />
+                        Command="{Binding ElementName=Scene3D, Path=EastViewCommand, Mode=OneTime}" />
                 <Button Content="S"
                         Style="{StaticResource ButtonStyle}"
-                        Command="hx:ViewportCommands.LeftView"
-                        CommandTarget="{Binding ElementName=Viewport}" />
+                        Command="{Binding ElementName=Scene3D, Path=SouthViewCommand, Mode=OneTime}" />
                 <Button Content="N"
                         Style="{StaticResource ButtonStyle}"
-                        Command="hx:ViewportCommands.RightView"
-                        CommandTarget="{Binding ElementName=Viewport}" />
+                        Command="{Binding ElementName=Scene3D, Path=NorthViewCommand, Mode=OneTime}" />
             </WrapPanel>
 
             <TextBlock Grid.Row="8" Grid.Column="0"
@@ -131,8 +107,9 @@
                        Text="Background: " />
             <ComboBox Grid.Row="8" Grid.Column="1"
                       Style="{StaticResource ComboboxStyle}"
+                      Name="BackgroundCombobox"
                       ItemsSource="{StaticResource BackgroundColors}"
-                      SelectedValue="{Binding ElementName=Viewport, Path=BackgroundColor, Mode=TwoWay}" />
+                      SelectedIndex="0" />
         </Grid>
     </Grid>
 </Window>

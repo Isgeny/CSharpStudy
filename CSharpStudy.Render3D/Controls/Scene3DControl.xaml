@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="CSharpStudy.Render3D.Controls.Scene3DControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:hx="clr-namespace:HelixToolkit.Wpf.SharpDX;assembly=HelixToolkit.Wpf.SharpDX"
+             Name="Scene3D">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Resources/Viewport3DStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <hx:PerspectiveCamera x:Key="HomeCamera"
+                                  Position="0,-25,0"
+                                  LookDirection="0,25,0"
+                                  UpDirection="0,0,1" />
+
+            <hx:PerspectiveCamera x:Key="Camera"
+                                  Position="0,-25,0"
+                                  LookDirection="0,25,0"
+                                  UpDirection="0,0,1" />
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <hx:Viewport3DX Style="{StaticResource BaseViewport3DStyle}"
+                    Name="Viewport"
+                    DefaultCamera="{StaticResource HomeCamera}"
+                    Camera="{StaticResource Camera}"
+                    ShowCoordinateSystem="{Binding ElementName=Scene3D, Path=ShowCoordinateSystem}"
+                    BackgroundColor="{Binding ElementName=Scene3D, Path=BackgroundColor}">
+        <hx:Viewport3DX.InputBindings>
+            <KeyBinding Command="hx:ViewportCommands.ZoomExtents" Gesture="Control+E" />
+            <MouseBinding Command="hx:ViewportCommands.Rotate" Gesture="LeftClick" />
+            <MouseBinding Command="hx:ViewportCommands.Zoom" Gesture="MiddleClick" />
+            <MouseBinding Command="hx:ViewportCommands.Zoom" Gesture="Control+MiddleClick" />
+            <MouseBinding Command="hx:ViewportCommands.Pan" Gesture="MiddleClick" />
+        </hx:Viewport3DX.InputBindings>
+
+        <hx:Viewport3DX.EffectsManager>
+            <hx:DefaultEffectsManager />
+        </hx:Viewport3DX.EffectsManager>
+
+        <hx:AmbientLight3D />
+
+        <hx:ItemsModel3D ItemsSource="{Binding MeshModels}"
+                         ItemTemplate="{StaticResource MeshModelsTemplate}" />
+    </hx:Viewport3DX>
+</UserControl>
