@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpStudy.Benchmarks", "C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpStudy.EF", "CSharpStudy.EF\CSharpStudy.EF.csproj", "{60B6336D-9C22-4E1F-9B46-D26CE2EA5AF4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpStudy.HotChocolate", "CSharpStudy.HotChocolate\CSharpStudy.HotChocolate.csproj", "{646F6BEA-5A05-425D-BCBE-4F12187E1627}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{60B6336D-9C22-4E1F-9B46-D26CE2EA5AF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{60B6336D-9C22-4E1F-9B46-D26CE2EA5AF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{60B6336D-9C22-4E1F-9B46-D26CE2EA5AF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{646F6BEA-5A05-425D-BCBE-4F12187E1627}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{646F6BEA-5A05-425D-BCBE-4F12187E1627}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{646F6BEA-5A05-425D-BCBE-4F12187E1627}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{646F6BEA-5A05-425D-BCBE-4F12187E1627}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
